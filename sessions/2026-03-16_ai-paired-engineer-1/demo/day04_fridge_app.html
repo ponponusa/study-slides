@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>冷蔵庫管理アプリ - CRUD体験</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Hiragino Kaku Gothic ProN', 'Noto Sans JP', sans-serif;
+      background: linear-gradient(135deg, #e0f7fa 0%, #fff3e0 100%);
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      text-align: center;
+      color: #1565c0;
+      margin-bottom: 8px;
+      font-size: 24px;
+    }
+
+    .subtitle {
+      text-align: center;
+      color: #666;
+      font-size: 14px;
+      margin-bottom: 24px;
+    }
+
+    /* --- 追加フォーム --- */
+    .add-form {
+      background: white;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      margin-bottom: 20px;
+    }
+
+    .add-form h2 {
+      font-size: 16px;
+      color: #2e7d32;
+      margin-bottom: 12px;
+    }
+
+    .add-form h2::before {
+      content: "C";
+      display: inline-block;
+      background: #2e7d32;
+      color: white;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      text-align: center;
+      line-height: 24px;
+      font-size: 14px;
+      font-weight: bold;
+      margin-right: 8px;
+    }
+
+    .form-row {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+
+    .form-row input {
+      flex: 1;
+      padding: 10px 12px;
+      border: 2px solid #e0e0e0;
+      border-radius: 8px;
+      font-size: 14px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .form-row input:focus {
+      border-color: #1565c0;
+    }
+
+    .form-row input[type="number"] {
+      max-width: 100px;
+    }
+
+    .btn {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    }
+
+    .btn-add {
+      background: #2e7d32;
+      color: white;
+    }
+
+    .btn-add:hover {
+      background: #1b5e20;
+    }
+
+    /* --- 食材リスト --- */
+    .food-list {
+      background: white;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    .food-list h2 {
+      font-size: 16px;
+      color: #1565c0;
+      margin-bottom: 4px;
+    }
+
+    .food-list h2::before {
+      content: "R";
+      display: inline-block;
+      background: #1565c0;
+      color: white;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      text-align: center;
+      line-height: 24px;
+      font-size: 14px;
+      font-weight: bold;
+      margin-right: 8px;
+    }
+
+    .food-count {
+      font-size: 12px;
+      color: #999;
+      margin-bottom: 16px;
+    }
+
+    .empty-message {
+      text-align: center;
+      color: #bbb;
+      padding: 40px 20px;
+      font-size: 14px;
+    }
+
+    .food-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px;
+      border-bottom: 1px solid #f0f0f0;
+      animation: slideIn 0.3s ease;
+    }
+
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateX(-10px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    .food-item:last-child {
+      border-bottom: none;
+    }
+
+    .food-emoji {
+      font-size: 28px;
+      flex-shrink: 0;
+    }
+
+    .food-info {
+      flex: 1;
+    }
+
+    .food-name {
+      font-weight: bold;
+      font-size: 15px;
+      color: #333;
+    }
+
+    .food-qty {
+      font-size: 12px;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    .food-actions {
+      display: flex;
+      gap: 4px;
+      flex-shrink: 0;
+    }
+
+    .btn-sm {
+      padding: 6px 12px;
+      font-size: 12px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: all 0.2s;
+    }
+
+    .btn-update {
+      background: #fff3e0;
+      color: #e65100;
+    }
+
+    .btn-update:hover {
+      background: #ffe0b2;
+    }
+
+    .btn-delete {
+      background: #ffebee;
+      color: #c62828;
+    }
+
+    .btn-delete:hover {
+      background: #ffcdd2;
+    }
+
+    /* --- CRUD ログ --- */
+    .crud-log {
+      background: #263238;
+      border-radius: 12px;
+      padding: 16px;
+      margin-top: 20px;
+      max-height: 200px;
+      overflow-y: auto;
+    }
+
+    .crud-log h2 {
+      font-size: 14px;
+      color: #80cbc4;
+      margin-bottom: 8px;
+    }
+
+    .log-entry {
+      font-family: 'Courier New', monospace;
+      font-size: 12px;
+      color: #b0bec5;
+      padding: 2px 0;
+    }
+
+    .log-entry .log-c { color: #a5d6a7; }
+    .log-entry .log-r { color: #90caf9; }
+    .log-entry .log-u { color: #ffe082; }
+    .log-entry .log-d { color: #ef9a9a; }
+    .log-entry .log-time { color: #78909c; }
+
+    /* --- CRUD ラベル説明 --- */
+    .crud-legend {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      margin-top: 20px;
+      flex-wrap: wrap;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      color: #666;
+    }
+
+    .legend-badge {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>冷蔵庫管理アプリ</h1>
+    <p class="subtitle">CRUD操作を体験しよう</p>
+
+    <!-- Create -->
+    <div class="add-form">
+      <h2>食材を買う（Create）</h2>
+      <div class="form-row">
+        <input type="text" id="foodName" placeholder="食材名（例: 卵）">
+        <input type="number" id="foodQty" placeholder="数" min="1" value="1">
+        <button class="btn btn-add" onclick="createFood()">追加</button>
+      </div>
+    </div>
+
+    <!-- Read -->
+    <div class="food-list">
+      <h2>冷蔵庫の中身（Read）</h2>
+      <p class="food-count" id="foodCount">0 件の食材</p>
+      <div id="foodContainer">
+        <p class="empty-message">冷蔵庫は空っぽです。食材を買いましょう！</p>
+      </div>
+    </div>
+
+    <!-- CRUD ログ -->
+    <div class="crud-log">
+      <h2>操作ログ（データベースの記録）</h2>
+      <div id="logContainer"></div>
+    </div>
+
+    <!-- CRUD ラベル -->
+    <div class="crud-legend">
+      <div class="legend-item">
+        <span class="legend-badge" style="background:#2e7d32">C</span>
+        Create（作成）
+      </div>
+      <div class="legend-item">
+        <span class="legend-badge" style="background:#1565c0">R</span>
+        Read（読取）
+      </div>
+      <div class="legend-item">
+        <span class="legend-badge" style="background:#e65100">U</span>
+        Update（更新）
+      </div>
+      <div class="legend-item">
+        <span class="legend-badge" style="background:#c62828">D</span>
+        Delete（削除）
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // ====================================================
+    //  データベース（冷蔵庫）の役割を果たす配列
+    //  現実のアプリでは、これがMySQL等のDBになる
+    // ====================================================
+    let fridge = [];
+    let nextId = 1;
+
+    // 食材名に対応する絵文字マッピング
+    const emojiMap = {
+      '卵': '🥚', 'たまご': '🥚', '玉子': '🥚',
+      '牛乳': '🥛', 'ミルク': '🥛',
+      'パン': '🍞', '食パン': '🍞',
+      'りんご': '🍎', 'リンゴ': '🍎',
+      'バナナ': '🍌',
+      'みかん': '🍊', 'オレンジ': '🍊',
+      'ぶどう': '🍇',
+      '肉': '🥩', '牛肉': '🥩', '豚肉': '🥩', '鶏肉': '🍗',
+      '魚': '🐟', 'さかな': '🐟',
+      '野菜': '🥬', 'レタス': '🥬', 'キャベツ': '🥬',
+      'にんじん': '🥕', '人参': '🥕',
+      'トマト': '🍅',
+      'チーズ': '🧀',
+      'ケーキ': '🍰',
+      'ビール': '🍺',
+      '水': '💧',
+      'お茶': '🍵',
+      'ジュース': '🧃',
+      'アイス': '🍨',
+      'ヨーグルト': '🥛',
+      'バター': '🧈',
+      '豆腐': '🧊',
+      '納豆': '🫘',
+    };
+
+    function getEmoji(name) {
+      for (const [key, emoji] of Object.entries(emojiMap)) {
+        if (name.includes(key)) return emoji;
+      }
+      return '🍽️';
+    }
+
+    function getTime() {
+      return new Date().toLocaleTimeString('ja-JP');
+    }
+
+    // ====================================================
+    //  Create（買う）= データを新規作成する
+    // ====================================================
+    function createFood() {
+      const nameInput = document.getElementById('foodName');
+      const qtyInput = document.getElementById('foodQty');
+      const name = nameInput.value.trim();
+      const qty = parseInt(qtyInput.value) || 1;
+
+      if (!name) {
+        nameInput.focus();
+        nameInput.style.borderColor = '#c62828';
+        setTimeout(() => nameInput.style.borderColor = '#e0e0e0', 1000);
+        return;
+      }
+
+      // DBにINSERTするイメージ
+      const food = {
+        id: nextId++,
+        name: name,
+        quantity: qty,
+        emoji: getEmoji(name),
+        createdAt: getTime()
+      };
+      fridge.push(food);
+
+      addLog('C', `CREATE: "${name}" x${qty} を冷蔵庫に追加しました (id=${food.id})`);
+
+      nameInput.value = '';
+      qtyInput.value = '1';
+      nameInput.focus();
+
+      renderFridge();
+    }
+
+    // ====================================================
+    //  Read（見る）= データを一覧表示する
+    // ====================================================
+    function renderFridge() {
+      const container = document.getElementById('foodContainer');
+      const countEl = document.getElementById('foodCount');
+
+      addLog('R', `READ: 冷蔵庫の中身を表示 (${fridge.length}件)`);
+
+      countEl.textContent = `${fridge.length} 件の食材`;
+
+      if (fridge.length === 0) {
+        container.innerHTML = '<p class="empty-message">冷蔵庫は空っぽです。食材を買いましょう！</p>';
+        return;
+      }
+
+      container.innerHTML = fridge.map(food => `
+        <div class="food-item">
+          <span class="food-emoji">${food.emoji}</span>
+          <div class="food-info">
+            <div class="food-name">${food.name}</div>
+            <div class="food-qty">数量: ${food.quantity} ／ 追加日時: ${food.createdAt}</div>
+          </div>
+          <div class="food-actions">
+            <button class="btn-sm btn-update" onclick="updateFood(${food.id})" title="Update（数量変更）">
+              U 数量変更
+            </button>
+            <button class="btn-sm btn-delete" onclick="deleteFood(${food.id})" title="Delete（捨てる）">
+              D 捨てる
+            </button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // ====================================================
+    //  Update（数量変更）= 既存データを更新する
+    // ====================================================
+    function updateFood(id) {
+      const food = fridge.find(f => f.id === id);
+      if (!food) return;
+
+      const newQty = prompt(`「${food.name}」の新しい数量を入力してください（現在: ${food.quantity}）`);
+      if (newQty === null) return;
+
+      const qty = parseInt(newQty);
+      if (isNaN(qty) || qty < 0) {
+        alert('正しい数量を入力してください');
+        return;
+      }
+
+      if (qty === 0) {
+        deleteFood(id);
+        return;
+      }
+
+      const oldQty = food.quantity;
+      food.quantity = qty;
+
+      addLog('U', `UPDATE: "${food.name}" の数量を ${oldQty} → ${qty} に変更しました (id=${id})`);
+      renderFridge();
+    }
+
+    // ====================================================
+    //  Delete（捨てる）= データを削除する
+    // ====================================================
+    function deleteFood(id) {
+      const food = fridge.find(f => f.id === id);
+      if (!food) return;
+
+      if (!confirm(`「${food.name}」を冷蔵庫から捨てますか？`)) return;
+
+      fridge = fridge.filter(f => f.id !== id);
+
+      addLog('D', `DELETE: "${food.name}" を冷蔵庫から削除しました (id=${id})`);
+      renderFridge();
+    }
+
+    // ====================================================
+    //  操作ログ（DBのトランザクションログのイメージ）
+    // ====================================================
+    function addLog(type, message) {
+      const logContainer = document.getElementById('logContainer');
+      const colorClass = `log-${type.toLowerCase()}`;
+      const entry = document.createElement('div');
+      entry.className = 'log-entry';
+      entry.innerHTML = `<span class="log-time">[${getTime()}]</span> <span class="${colorClass}">${message}</span>`;
+      logContainer.prepend(entry);
+    }
+
+    // 初期表示時のログ
+    addLog('R', 'READ: アプリ起動 — 冷蔵庫の中身を確認中...');
+
+    // Enterキーで追加できるようにする
+    document.getElementById('foodName').addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') createFood();
+    });
+  </script>
+</body>
+</html>

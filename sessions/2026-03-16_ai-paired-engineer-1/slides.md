@@ -125,13 +125,13 @@ ponpon.USA
 
 <br>
 
-| Day | テーマ | 習得する Copilot 機能 |
-|---|---|---|
-| **1** | プロンプトの基礎 | 基本チャット、モデル選択 |
-| **2** | HTTP通信 | `/explain`、`#selection` |
-| **3** | Front / Back | `@workspace`、`#file` |
-| **4** | DB / CRUD | Agent Mode、`/new` |
-| **5** | Webの仕組み | Copilot Edits（Edit Mode） |
+| Day   | テーマ           | 習得する Copilot 機能      |
+| ----- | ---------------- | -------------------------- |
+| **1** | プロンプトの基礎 | 基本チャット、モデル選択   |
+| **2** | HTTP通信         | `/explain`、`#selection`   |
+| **3** | Front / Back     | `@workspace`、`#file`      |
+| **4** | DB / CRUD        | Agent Mode、`/new`         |
+| **5** | Webの仕組み      | Copilot Edits（Edit Mode） |
 
 ---
 
@@ -377,12 +377,12 @@ ponpon.USA
 
 <br>
 
-| 操作 | 冷蔵庫 | DB | SNSなら |
-|---|---|---|---|
-| **C**reate | 食材を **買う** | データを作る | 投稿する |
-| **R**ead | 中身を **見る** | データを読む | タイムライン表示 |
-| **U**pdate | 数量を **変える** | データを更新 | プロフィール編集 |
-| **D**elete | 腐ったものを **捨てる** | データを削除 | 投稿を削除 |
+| 操作       | 冷蔵庫                  | DB           | SNSなら          |
+| ---------- | ----------------------- | ------------ | ---------------- |
+| **C**reate | 食材を **買う**         | データを作る | 投稿する         |
+| **R**ead   | 中身を **見る**         | データを読む | タイムライン表示 |
+| **U**pdate | 数量を **変える**       | データを更新 | プロフィール編集 |
+| **D**elete | 腐ったものを **捨てる** | データを削除 | 投稿を削除       |
 
 ---
 
@@ -403,19 +403,37 @@ ponpon.USA
 
 <!-- _class: no-header all-text-center align-center -->
 
-# ハンズオン
+# ハンズオン前の準備
 
 <br>
 
+<div class="highlight-box">
+  <b>① 空のフォルダを作り、VS Code で開く</b><br>
+  <code>mkdir day04 && code day04</code>（Day 4 用の作業フォルダ）<br><br>
+  <b>② Copilot Chat を開く</b>（Ctrl/Cmd + Shift + I）<br><br>
+  <b>⚠ ポイント：今日はサーバー不要</b><br>
+  バックエンドや DB サービスは立てません<br>
+  データは <b>localStorage</b>（ブラウザ内蔵）に保存します<br>
+  → 生成された HTML ファイルを<b>ダブルクリック</b>でブラウザで開けばOK
+</div>
+
+---
+
+<!-- _class: no-header all-text-center align-center -->
+
 <div class="experiment-box">
   <b>Part 1（5分）：CRUD を日常に置き換える</b><br>
-  SNSの操作がCRUDのどれに対応するかCopilotに質問<br><br>
-  <b>Part 2（12分）：Agent Mode で冷蔵庫アプリを作る</b><br>
-  モードを <b>「Agent」</b> に切り替える<br>
-  「冷蔵庫管理Webアプリを作って。CRUD操作ができるように」<br>
-  Agent Modeが自律的にファイルを作る様子を<b>観察</b><br><br>
-  <b>Part 3（3分）：Agent Mode の振り返り</b><br>
-  「魔人に大きな仕事を任せた」感覚を言語化
+  Copilotに質問してみよう：<br>
+  <code>SNSで「投稿を編集する」はCRUDのどれに当たる？他の操作も教えて</code><br><br>
+  <b>Part 2（15分）：Agent Mode で冷蔵庫アプリを作る</b><br>
+  ① モードを <b>「Agent」</b> に切り替える<br>
+  ② 以下のプロンプトをコピペして送信：<br>
+  <code>HTML・CSS・JavaScriptのみで冷蔵庫管理Webアプリを1ファイルで作って。データの保存はlocalStorageを使って。CRUD操作ができるように</code><br>
+  ③ Agent Modeが自律的にファイルを作る様子を<b>観察</b><br>
+  ④ 完成したら生成された HTML ファイルを<b>ダブルクリック</b>で開いて動作確認<br><br>
+  <b>Part 3（5分）：Agent Mode の振り返り</b><br>
+  Copilotに聞いてみよう：<code>今作ったアプリのCRUD操作を一覧にして</code><br>
+  → 自分が指示しただけで完成した体験を、隣の人と共有してみよう
 </div>
 
 ---

@@ -34,7 +34,7 @@ style: |
     padding: 24px 16px;
     margin: 32px 32px;
   }
-  .copilot-box {
+  .observe-box {
     background-color: #e8f5e9;
     border-left: 4px solid #4caf50;
     padding: 24px 16px;
@@ -46,7 +46,9 @@ style: |
 <!-- _paginate: false -->
 
 ![ponpon.USA w:150px](https://avatars.githubusercontent.com/u/238978340?v=4)
+
 # AI Paired Engineer #1
+
 ## インターネットの世界観 — レストランと手紙
 
 2026-03-16
@@ -54,155 +56,102 @@ ponpon.USA
 
 ---
 
-<!-- _class: section -->
-<!-- _paginate: false -->
-
-## Phase 2 のはじまり
-
----
-
-<!-- _class: no-header all-text-center align-center -->
-
-# Phase 1 で「地図の読み方」を学んだ
-
-<br>
-
-### 鉄道のメタファーで、アーキテクチャの本質を掴んだ
-
-<br>
-
-## Phase 2 では
-## **AIに指示して、出てきたものを観察し、納得する**
-
----
-
-<!-- _class: no-header all-text-center align-center -->
-
-# Phase 2 の共通ルール
-
-<br>
-
-<div class="highlight-box">
-  <b>コードを書くのではない</b><br><br>
-  AIに指示して、出てきたものを<span class="green-accent-text">観察</span>し、<span class="green-accent-text">納得</span>する<br><br>
-  「わかった気になれた」＋<b>Copilotの機能を自力で使える</b>状態がゴール
-</div>
-
----
-
-<!-- _class: no-header all-text-center align-center -->
-
-# 毎回の流れ — 3パート構成
-
-<br>
-
-<div class="highlight-box">
-  <b>Part 1：</b>比喩で掴む — 今日のテーマを日常に置き換える<br><br>
-  <b>Part 2：</b>Copilot機能を学ぶ — 新しい武器を手に入れる<br><br>
-  <b>Part 3：</b>実験で確かめる — 手を動かして納得する
-</div>
-
----
-
 <!-- _class: no-header all-text-center align-center -->
 
 # 今週のテーマ
 
-<br>
-
 # インターネットの世界観
 
-<br>
-
-### 目に見えない「通信」のやり取りを
-### 物理的な「モノの移動」として脳内変換する
+### 目に見えない通信のやり取りを
+### 物理的なモノの移動として脳内変換させる
 
 ---
 
 <!-- _class: no-header all-text-center align-center table-center table-font-large -->
 
-# 今週の Copilot スキルツリー
+# 事前準備の確認
 
-<br>
+| 確認項目 | 手順 |
+| -------- | ---- |
+| **GitHub Copilot** | 拡張機能タブで有効化されているか確認 |
+| **GitHub Copilot Chat** | サイドバーの Copilot アイコン → Chat パネルが開くか確認 |
+| **Live Server** | 拡張機能タブで有効化されているか確認 |
 
-| Day   | テーマ           | 習得する Copilot 機能      |
-| ----- | ---------------- | -------------------------- |
-| **1** | プロンプトの基礎 | 基本チャット、モデル選択   |
-| **2** | HTTP通信         | `/explain`、`#selection`   |
-| **3** | Front / Back     | `@workspace`、`#file`      |
-| **4** | DB / CRUD        | Agent Mode、`/new`         |
-| **5** | Webの仕組み      | Copilot Edits（Edit Mode） |
+<div class="highlight-box">
+
+HTML ファイルを右クリック →「Open with Live Server」
+
+または右下ステータスバーの「Go Live」をクリック
+
+</div>
 
 ---
 
 <!-- _class: section -->
 <!-- _paginate: false -->
 
-## Day 1：AI活用 — プロンプトの基礎
+## Day 1：プロンプトの基礎
 
 ---
 
 <!-- _class: no-header all-text-center align-center -->
-
-# 今日の比喩
-
-<br>
 
 # 魔法のランプの魔人
 
-<br>
-
-### 具体的にお願いしないと
-### **変な叶え方をする**
-
----
-
-<!-- _class: no-header all-text-center align-center -->
-
-# 曖昧な願い vs 具体的な願い
-
-<br>
-
 <div class="highlight-box">
-  <b>曖昧：</b>「カレーの作り方を教えて」<br>
-  → どんなカレー？ 誰が？ 時間は？ 材料は？<br><br>
-  <b>具体：</b>「一人暮らしの男性が、15分以内に、<br>
-  コンビニ食材だけで作れるカレーのレシピを教えて」<br>
-  → <span class="green-accent-text">回答の質が劇的に変わる</span>
+
+曖昧なお願いは変な叶え方をする
+
+**「3つ願いを叶えてやろう」→「お金持ちになりたい」→ 銀行強盗をさせられた**
+
+**プロンプト = 魔人への正確な指示書**
+
 </div>
 
 ---
 
 <!-- _class: no-header all-text-center align-center -->
 
-# 今日の Copilot 機能
-
-<br>
-
-<div class="copilot-box">
-  <b>基本チャット</b> — Copilot Chat パネルで自由に質問<br><br>
-  <b>モデル選択</b> — GPT-4o / Claude / Gemini を切り替えられる<br><br>
-  モデルにも「個性」がある。用途で使い分ける
-</div>
-
----
-
-<!-- _class: no-header all-text-center align-center -->
-
-# ハンズオン
-
-<br>
+# 実験① 曖昧な指示 vs 具体的な指示
 
 <div class="experiment-box">
-  <b>Part 1（5分）：曖昧 vs 具体の体験</b><br>
-  「カレーの作り方を教えて」→ 回答を確認<br>
-  「一人暮らしの男性が、15分以内に...」→ 回答の質の差を比較<br><br>
-  <b>Part 2（10分）：モデルの切り替え体験</b><br>
-  同じプロンプトを GPT-4o → Claude Sonnet で実行<br>
-  回答のスタイルの違いを観察する<br><br>
-  <b>Part 3（5分）：コンテキストの段階的追加</b><br>
-  「Webアプリを作りたい」（曖昧）→<br>
-  「初心者が、Todoアプリを、HTML/JSだけで...」（具体）
+
+**【Copilot Chat → Ask モードで投げる】**
+
+```
+①「カレーの作り方を教えて」
+
+②「一人暮らしの男性が自宅で、
+   市販のルーを使って15分以内に作れる
+   カレーのレシピを教えて。
+   材料は近所のコンビニで揃うものだけで。」
+```
+
+**観察：** 回答の具体さ・使いやすさの違いを比較する
+
+</div>
+
+---
+
+<!-- _class: no-header all-text-center align-center -->
+
+# 実験② 自分のプロンプトを改善する
+
+<div class="experiment-box">
+
+**【続けて Ask モードで投げる】**
+
+```
+「私はこんな質問をよくAIに投げています：
+ [自分が過去に投げた質問を1つ書く]
+
+ この質問をより具体的で答えやすいプロンプトに
+ 書き直してください。
+ 改善した理由も教えてください。」
+```
+
+**観察：** Copilot が追加した「条件・制約・背景」を確認する
+
 </div>
 
 ---
@@ -214,10 +163,11 @@ ponpon.USA
 <br>
 
 <div class="highlight-box">
-  AIは <span class="red-accent-text">「察してくれない」</span> パートナー<br><br>
-  具体的な指示（<b>コンテキスト</b>）を与えるほど、<br>
-  回答の精度が上がる<br><br>
-  これは今後の <b>すべての実験の基礎</b> になる
+
+「AIは察してくれない」— 人間なら文脈を読むが、AIは書いてあることしか処理しない<br><br>
+
+**問いかけ：** 「AIは察してくれない」を自分の言葉で一言にするとしたら？
+
 </div>
 
 ---
@@ -225,70 +175,83 @@ ponpon.USA
 <!-- _class: section -->
 <!-- _paginate: false -->
 
-## Day 2：HTTP通信 — Client / Server
+## Day 2：HTTP 通信（Client / Server）
 
 ---
 
 <!-- _class: no-header all-text-center align-center -->
 
-# 今日の比喩
+# レストランの注文票
 
-<br>
+<div class="highlight-box">
 
-# レストランの注文
+**客（ブラウザ）** → 注文票（Request）→ **厨房（Server）** → 料理（Response）
 
-<br>
+注文が通らないときは理由（ステータスコード）がある
 
-### 客（ブラウザ）が注文（Request）を出す
-### 厨房（Server）が料理（Response）を返す
+</div>
 
 ---
 
 <!-- _class: no-header all-text-center align-center -->
 
-# エラーコード = 店員のセリフ
+# 実験① レストランごっこ
+
+<div class="experiment-box">
+
+**【Copilot Chat → Ask モードで投げる】**
+
+```
+「あなたはレストランの厨房（Webサーバー）です。
+ 私はお客（ブラウザ）として注文を出します。
+ 以下のHTTPステータスコードを、
+ レストランのシーンとしてセリフで再現してください：
+ ・200 OK（注文が通った）
+ ・404 Not Found（そのメニューは存在しない）
+ ・500 Internal Server Error（厨房で火事が起きた）
+ ・403 Forbidden（VIP客だけの特別メニューを頼まれた）」
+```
+
+</div>
+
+---
+
+<!-- _class: no-header all-text-center align-center -->
+
+# 実験② 本物の HTTP 通信を観察する
+
+<div class="experiment-box">
+
+**【Copilot Chat → Agent モードで投げる】**
+
+```
+「jsonplaceholder.typicode.com の /todos/1 に
+ fetch() でアクセスして、結果をページに表示する
+ HTMLを作って。ファイル名: http-demo.html」
+```
+
+**手順:** Live Server で開く → F12 → Network タブを確認
+
+- URL（= どこに繋いだか）
+- Status 200（= 料理が届いた）
+- Response（= 返ってきたデータ）
+
+</div>
+
+---
+
+<!-- _class: no-header all-text-center align-center -->
+
+# Day 2 の気づき
 
 <br>
 
 <div class="highlight-box">
-  <b>200：</b>「お待たせしました、ご注文の品です」<br><br>
-  <b>404：</b>「申し訳ございません、<span class="red-accent-text">品切れです</span>」<br><br>
-  <b>500：</b>「すみません、<span class="red-accent-text">厨房で火事です</span>」<br><br>
-  <b>403：</b>「お客様、<span class="red-accent-text">会員限定メニューです</span>」
-</div>
 
----
+「HTTPステータスコード」は怖い数字ではなく、<span class="green-accent-text">厨房からのメッセージ</span><br><br>
 
-<!-- _class: no-header all-text-center align-center -->
+**問いかけ：** 404 を見たとき、次から何を確認するか？一言で。
 
-# 今日の Copilot 機能
-
-<br>
-
-<div class="copilot-box">
-  <b><code>/explain</code></b> — 選択したコードを解説させるコマンド<br><br>
-  <b><code>#selection</code></b> — エディタで選択した範囲をCopilotに参照させる<br><br>
-  コードを選んで聞けば、Copilotが解説してくれる
-</div>
-
----
-
-<!-- _class: no-header all-text-center align-center -->
-
-# ハンズオン
-
-<br>
-
-<div class="experiment-box">
-  <b>Part 1（5分）：レストランごっこ</b><br>
-  Copilotに「私が客で、あなたが厨房です」と指示<br>
-  404 を「品切れ」、500 を「厨房パンク」で再現<br><br>
-  <b>Part 2（10分）：実際のHTTPを観察</b><br>
-  ブラウザの DevTools（Networkタブ）でリクエスト・レスポンスを確認<br>
-  ステータスコードを「レストランで言うと何？」と質問<br><br>
-  <b>Part 3（5分）：/explain と #selection の初体験</b><br>
-  HTMLの <code>&lt;form&gt;</code> タグや <code>fetch()</code> を選択<br>
-  <b><code>#selection</code></b> → 「この選択範囲を説明して」
 </div>
 
 ---
@@ -296,55 +259,89 @@ ponpon.USA
 <!-- _class: section -->
 <!-- _paginate: false -->
 
-## Day 3：役割分担 — Front / Back
+## Day 3：役割分担（Front / Back）
 
 ---
 
 <!-- _class: no-header all-text-center align-center -->
-
-# 今日の比喩
-
-<br>
 
 # ホール係とシェフ
 
-<br>
+<div class="highlight-box">
 
-### ホール（見た目・接客） = フロントエンド
-### シェフ（調理・素材加工） = バックエンド
+**ホール係（フロントエンド）** = 見た目・接客・お客との窓口
 
----
+**シェフ（バックエンド）** = 調理・加工・データの処理
 
-<!-- _class: no-header all-text-center align-center -->
+どちらが欠けても、客に料理は届かない
 
-# 今日の Copilot 機能
-
-<br>
-
-<div class="copilot-box">
-  <b><code>@workspace</code></b> — プロジェクト全体を見て回答してくれる<br><br>
-  <b><code>#file:ファイル名</code></b> — 特定のファイルを指定して質問できる<br><br>
-  「このプロジェクトの構造を教えて」が一発でできる
 </div>
 
 ---
 
 <!-- _class: no-header all-text-center align-center -->
 
-# ハンズオン
+# 実験① ホール係だけの電卓を作る
+
+<div class="experiment-box">
+
+**【Copilot Chat → Agent モードで投げる】**
+
+```
+「見た目だけの電卓HTMLを作って。
+ ・数字ボタン、+−×÷ボタン、=ボタンを並べる
+ ・ただし、JavaScriptは一切書かない
+ ・ボタンを押しても何も起きない、デザインだけの電卓で
+ ファイル名: calc-nojs.html」
+```
+
+**手順:** Live Server で開く → ボタンを押す → 何も起きない
+
+→ これが「ホール係しかいないレストラン」
+
+</div>
+
+---
+
+<!-- _class: no-header all-text-center align-center -->
+
+# 実験② シェフを雇う（JS を追加）
+
+<div class="experiment-box">
+
+**【続けて Agent モードで投げる】**
+
+```
+「calc-nojs.html にJavaScriptを追加して、
+ 実際に計算できる電卓にして。
+ ファイル名: calc-with-js.html」
+```
+
+**手順:** ファイルが生成されたら JS の計算ロジック部分を選択
+
+```
+Copilot Chat（Ask モード）で #selection を使って:
+「#selection これがバックエンド相当のロジックです。
+ ホール係（HTML）とシェフ（JS）の
+ 役割分担を説明して」
+```
+
+</div>
+
+---
+
+<!-- _class: no-header all-text-center align-center -->
+
+# Day 3 の気づき
 
 <br>
 
-<div class="experiment-box">
-  <b>Part 1（5分）：見た目だけの電卓を作る</b><br>
-  「HTML/CSSだけで電卓の見た目を作って。計算はできない状態で」<br>
-  ボタンを押しても何も起きない → シェフがいない！<br><br>
-  <b>Part 2（10分）：動く電卓にする + @workspace 体験</b><br>
-  「JavaScriptで計算機能を追加して」→ 動く電卓になる<br>
-  <b><code>@workspace</code></b> でフロント/バックの役割分担を質問<br>
-  <b><code>#file:calculator.html</code></b> で特定ファイルを参照<br><br>
-  <b>Part 3（5分）：境界線を引く</b><br>
-  「ホールとシェフの境界線 ＝ API」という伏線を張る
+<div class="highlight-box">
+
+「フロントとバック」は技術の話ではなく、<span class="blue-accent-text">役割の分担</span><br><br>
+
+**問いかけ：** この電卓を「SNS のいいね機能」にするには何が必要か？ → なぜバックエンドが必要になるのか自分で答えてみる
+
 </div>
 
 ---
@@ -352,104 +349,93 @@ ponpon.USA
 <!-- _class: section -->
 <!-- _paginate: false -->
 
-## Day 4：DBの概念 — CRUD操作
+## Day 4：DB の概念（CRUD 操作）
 
 ---
 
 <!-- _class: no-header all-text-center align-center -->
 
-# 今日の比喩
-
-<br>
-
-# 巨大冷蔵庫と在庫表
-
-<br>
-
-### 注文のたびに市場に行くわけじゃない
-### 冷蔵庫（DB）から出す
-
----
-
-<!-- _class: no-header all-text-center align-center table-center table-font-large -->
-
-# CRUD = 冷蔵庫の4つの操作
-
-<br>
-
-| 操作       | 冷蔵庫                  | DB           | SNSなら          |
-| ---------- | ----------------------- | ------------ | ---------------- |
-| **C**reate | 食材を **買う**         | データを作る | 投稿する         |
-| **R**ead   | 中身を **見る**         | データを読む | タイムライン表示 |
-| **U**pdate | 数量を **変える**       | データを更新 | プロフィール編集 |
-| **D**elete | 腐ったものを **捨てる** | データを削除 | 投稿を削除       |
-
----
-
-<!-- _class: no-header all-text-center align-center -->
-
-# 今日の Copilot 機能
-
-<br>
-
-<div class="copilot-box">
-  <b>Agent Mode</b> — Copilotが自律的にファイルを作成・編集してくれるモード<br><br>
-  通常チャット：質問に答える<br>
-  Agent Mode：<span class="green-accent-text">自律的に作業する</span><br><br>
-  魔人に「大きな仕事」を任せられる
-</div>
-
----
-
-<!-- _class: no-header all-text-center align-center -->
-
-# ハンズオン前の準備
-
-<br>
+# 巨大な冷蔵庫
 
 <div class="highlight-box">
-  <b>① 空のフォルダを作り、VS Code で開く</b><br>
-  <code>mkdir day04 && code day04</code>（Day 4 用の作業フォルダ）<br><br>
-  <b>② Copilot Chat を開く</b>（Ctrl/Cmd + Shift + I）<br><br>
-  <b>⚠ ポイント：今日はサーバー不要</b><br>
-  バックエンドや DB サービスは立てません<br>
-  データは <b>localStorage</b>（ブラウザ内蔵）に保存します<br>
-  → 生成された HTML ファイルを<b>ダブルクリック</b>でブラウザで開けばOK
+
+データベース = **世界最大の冷蔵庫**
+
+「買う（Create）・見る（Read）・変える（Update）・捨てる（Delete）」
+
+どんなアプリも、データに対してこの **4つ** しかしていない
+
 </div>
 
 ---
 
 <!-- _class: no-header all-text-center align-center -->
+
+# 実験① Instagram を CRUD で分解する
 
 <div class="experiment-box">
-  <b>Part 1（5分）：CRUD を日常に置き換える</b><br>
-  Copilotに質問してみよう：<br>
-  <code>SNSで「投稿を編集する」はCRUDのどれに当たる？他の操作も教えて</code><br><br>
-  <b>Part 2（15分）：Agent Mode で冷蔵庫アプリを作る</b><br>
-  ① モードを <b>「Agent」</b> に切り替える<br>
-  ② 以下のプロンプトをコピペして送信：<br>
-  <code>HTML・CSS・JavaScriptのみで冷蔵庫管理Webアプリを1ファイルで作って。データの保存はlocalStorageを使って。CRUD操作ができるように</code><br>
-  ③ Agent Modeが自律的にファイルを作る様子を<b>観察</b><br>
-  ④ 完成したら生成された HTML ファイルを<b>ダブルクリック</b>で開いて動作確認<br><br>
-  <b>Part 3（5分）：Agent Mode の振り返り</b><br>
-  Copilotに聞いてみよう：<code>今作ったアプリのCRUD操作を一覧にして</code><br>
-  → 自分が指示しただけで完成した体験を、隣の人と共有してみよう
+
+**【Copilot Chat → Ask モードで投げる】**
+
+```
+「Instagramの機能を、CRUD（Create / Read / Update / Delete）で
+ 分解した表を作って。
+ ・ユーザーがする操作
+ ・それがCRUDのどれに当たるか
+ ・裏でデータベースに何が起きているか
+ の3列で。」
+```
+
+**観察：** 「写真を投稿する」「いいねする」「プロフィールを編集する」「投稿を削除する」がどの操作に対応するか確認する
+
 </div>
 
 ---
 
 <!-- _class: no-header all-text-center align-center -->
 
-# どんな複雑なアプリも...
+# 実験② 冷蔵庫アプリを自律生成する
+
+<div class="experiment-box">
+
+**【Copilot Chat → Agent モードで投げる】**
+
+```
+「食材を管理する冷蔵庫アプリのHTMLを作って。
+ ・食材の追加（Create）
+ ・食材一覧の表示（Read）
+ ・食材名の編集（Update）
+ ・食材の削除（Delete）
+ の4機能を実装して。
+ データはlocalStorageに保存して、
+ ページを再読み込みしても消えないようにして。
+ ファイル名: fridge.html」
+```
+
+**手順:** Live Server で開く → CRUD を全部試す → リロードしてデータが残ることを確認
+
+</div>
+
+<div class="observe-box">
+
+- Instagram と同じ CRUD をしている → スケールと扱うデータが違うだけ
+
+</div>
+
+---
+
+<!-- _class: no-header all-text-center align-center -->
+
+# Day 4 の気づき
 
 <br>
 
 <div class="highlight-box">
-  結局は <span class="green-accent-text">「データの読み書き」</span> しかしていない<br><br>
-  SNSに「投稿する」= Create<br>
-  タイムライン表示 = Read<br>
-  プロフィール編集 = Update<br>
-  投稿を削除する = Delete
+
+「この冷蔵庫アプリと Instagram の本質的な違いは何か」<br><br>
+
+**問いかけ：** CRUD の構造は同じ。スケールと扱うデータが違うだけ。あなたが使っているアプリを 1 つ CRUD で分解すると？
+
 </div>
 
 ---
@@ -457,71 +443,94 @@ ponpon.USA
 <!-- _class: section -->
 <!-- _paginate: false -->
 
-## Day 5：まとめ — Webの仕組み
+## Day 5：まとめ（Web の仕組み）
 
 ---
 
 <!-- _class: no-header all-text-center align-center -->
-
-# 今日の比喩
-
-<br>
 
 # ピタゴラスイッチ
 
-<br>
+<div class="highlight-box">
 
-### すべての要素が連動して、一つの結果を生み出す
+すべての要素が連動している
+
+**ブラウザ → HTTP → サーバー → DB → API → レスポンス → 画面**
+
+1つが欠けると、ボールは転がらない
+
+</div>
 
 ---
 
 <!-- _class: no-header all-text-center align-center -->
 
-# 「投稿」ボタンを押してからタイムラインに表示されるまで
+# 実験① いいねボタンの旅路を脚本にする
+
+<div class="experiment-box">
+
+**【Copilot Chat → Ask モードで投げる】**
+
+```
+「Instagramで『いいね』ボタンを押してから
+ ハートが赤くなるまでの流れを、
+ 以下の登場人物を使って脚本（ナレーション形式）で書いて：
+
+ 登場人物:
+ ・ブラウザ（お客）
+ ・HTTPリクエスト（注文票）
+ ・Webサーバー（ホール係）
+ ・データベース（冷蔵庫）
+ ・HTTPレスポンス（料理）
+
+ 技術用語（HTTP・CRUD・API・JSON）を
+ 台詞に自然に含めて」
+```
+
+</div>
+
+---
+
+<!-- _class: no-header all-text-center align-center -->
+
+# 実験② 冷蔵庫アプリに機能追加する
+
+<div class="experiment-box">
+
+**【Copilot Chat → Agent モードで投げる】**
+
+```
+「fridge.html に、食材の賞味期限を登録・表示する機能を追加して。
+ 期限が3日以内の食材は赤字で表示して。」
+```
+
+**観察：** Agent モードが提案する diff（変更箇所）を確認する
+
+- どのファイルの何行目が変わるか
+- Accept / Discard で変更を選択する体験
+
+</div>
+
+<div class="observe-box">
+
+- 既存コードを「壊さずに」機能追加できた → これがチーム開発の基本
+
+</div>
+
+---
+
+<!-- _class: no-header all-text-center align-center -->
+
+# Day 5 の気づき
 
 <br>
 
 <div class="highlight-box">
-  1. <b>客</b>（ブラウザ）が「投稿」ボタンを押す<br><br>
-  2. <b>ホール</b>（フロント）が注文票（Request）を厨房に渡す<br><br>
-  3. <b>シェフ</b>（バックエンド）が冷蔵庫（DB）にデータを保存（Create）<br><br>
-  4. <b>厨房</b>から「完了しました」（Response: 200）が返る<br><br>
-  5. <b>ホール</b>がタイムラインに新しい投稿を表示（画面更新）
-</div>
 
----
+Week 1 で登場した全員が繋がっていた<br><br>
 
-<!-- _class: no-header all-text-center align-center -->
+**問いかけ：** 今日の旅路を、スマホを使ったことのない祖父母に説明するとしたら？
 
-# 今日の Copilot 機能
-
-<br>
-
-<div class="copilot-box">
-  <b>Copilot Edits（Edit Mode）</b><br><br>
-  既存のコードに対して「ここをこう変えて」と指示すると<br>
-  <b>差分（diff）</b> として変更を提案してくれる<br><br>
-  Accept / Reject で変更を取捨選択できる
-</div>
-
----
-
-<!-- _class: no-header all-text-center align-center -->
-
-# ハンズオン
-
-<br>
-
-<div class="experiment-box">
-  <b>Part 1（5分）：「投稿」の裏側をストーリーにする</b><br>
-  レストランの比喩で処理フローを脚本にする<br><br>
-  <b>Part 2（12分）：Edit Mode で既存コードを改造する</b><br>
-  Day 4 の冷蔵庫アプリを開く<br>
-  モードを <b>「Edit」</b> に切り替える<br>
-  「食材ごとに賞味期限を追加して、期限切れは赤く表示して」<br>
-  差分が提案される → Accept / Reject を練習<br><br>
-  <b>Part 3（3分）：Week 1 の総復習</b><br>
-  5つの比喩と5つのCopilot機能を振り返り
 </div>
 
 ---
@@ -530,25 +539,14 @@ ponpon.USA
 
 # Week 1 Key Takeaways
 
-<br>
+<div class="highlight-box">
 
-### 1. **AIは「察してくれない」パートナー**
-コンテキストが命。モデルの使い分けも重要
+- **プロンプト** = 魔人への正確な指示書（曖昧さをなくす）
+- **HTTP 通信** = レストランの注文票と料理（Request / Response）
+- **Front / Back** = ホール係とシェフ（役割の分担）
+- **CRUD** = 冷蔵庫の 4 操作（どんなアプリも同じ）
 
-<br>
-
-### 2. **HTTP通信 = レストランの注文**
-`/explain` と `#selection` でコードを読み解ける
-
-<br>
-
-### 3. **フロント = ホール、バック = シェフ**
-`@workspace` と `#file` でプロジェクト全体を見渡せる
-
-<br>
-
-### 4. **すべてのアプリは CRUD**
-Agent Mode で大きな仕事を任せられる
+</div>
 
 ---
 
@@ -556,15 +554,11 @@ Agent Mode で大きな仕事を任せられる
 
 # 次回予告
 
-<br>
+## AI Paired Engineer #2
 
-# AI Paired Engineer #2
-## プログラミングの概念 — 整理整頓とルール
+### プログラミングの概念 — 整理整頓とルール
 
-<br>
-
-### `#codebase`、`/fix`、`/tests`、Vision入力
-### コード理解系の武器を手に入れます
+変数・型・アルゴリズム・OOP・テスト
 
 ---
 

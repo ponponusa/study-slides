@@ -34,7 +34,7 @@ style: |
     padding: 24px 16px;
     margin: 32px 32px;
   }
-  .copilot-box {
+  .observe-box {
     background-color: #e8f5e9;
     border-left: 4px solid #4caf50;
     padding: 24px 16px;
@@ -56,148 +56,113 @@ ponpon.USA
 
 ---
 
-<!-- _class: section -->
-<!-- _paginate: false -->
-
-## Week 2 のテーマ
-
----
-
-<!-- _class: no-header all-text-center align-center -->
-
-# Week 1 では「インターネットの地図」を手に入れた
-
-<br>
-
-### レストランの比喩で、通信の全体像を掴んだ
-
-<br>
-
-## Week 2 では
-
-## **プログラムの中にある「ルール」を発見する**
-
----
-
-<!-- _class: no-header all-text-center align-center -->
-
-# Week 2 の狙い
-
-<br>
-
-<div class="highlight-box">
-  プログラムの文法ではなく<br>
-  <b>「なぜそのルールがあるのか」</b> という必然性を学ぶ<br><br>
-  比喩の世界をCopilotに作らせ<br>
-  コードの中に<span class="green-accent-text">「整理整頓のルール」</span>を発見する
-</div>
-
----
-
 <!-- _class: no-header all-text-center align-center -->
 
 # 今週のテーマ
 
-<br>
-
 # プログラミングの概念
 
-<br>
-
-### 「整理整頓」と「ルール」
-
-### すべては **ミスを防ぐ仕組み** だった
+### プログラムの「文法」ではなく
+### 「なぜそのルールがあるのか」という必然性を学ぶ
 
 ---
 
 <!-- _class: no-header all-text-center align-center table-center table-font-large -->
 
-# 今週の Copilot スキルツリー
+# 事前準備の確認
 
-<br>
+| 確認項目 | 手順 |
+| -------- | ---- |
+| **GitHub Copilot** | 拡張機能タブで有効化されているか確認 |
+| **GitHub Copilot Chat** | サイドバーの Copilot アイコン → Chat パネルが開くか確認 |
+| **Live Server** | 拡張機能タブで有効化されているか確認 |
 
-| Day | テーマ | 習得する Copilot 機能 |
-|---|---|---|
-| **6** | 変数と型 | `#selection` + `/explain` |
-| **7** | アルゴリズム | `/fix` |
-| **8** | OOP | `#file` 複数指定 |
-| **9** | テスト | Vision入力 |
-| **10** | まとめ | Week 2 全機能の組み合わせ |
+<div class="highlight-box">
+
+HTML ファイルを右クリック →「Open with Live Server」
+
+または右下ステータスバーの「Go Live」をクリック
+
+</div>
 
 ---
 
 <!-- _class: section -->
 <!-- _paginate: false -->
 
-## Day 6：変数と型 — データ構造
+## Day 6：変数と型
 
 ---
 
 <!-- _class: no-header all-text-center align-center -->
 
-# 今日の比喩
+# 「ラベル付き収納 BOX」
 
 <br>
 
-# ラベル付き収納BOX
+### 「靴下」の箱に「お茶」を入れると朝パニックになる
 
-<br>
-
-### 「靴下」の箱に「お茶」を入れると
-
-### **朝パニックになる**
+### 型はラベル = <span class="red-accent-text">間違いを防ぐ仕組み</span>
 
 ---
 
 <!-- _class: no-header all-text-center align-center -->
 
-# ラベル（型）は安全装置
-
-<br>
-
-<div class="highlight-box">
-  引っ越しの荷造りで、<br>
-  段ボールにラベルを貼らなかったらどうなるか？<br><br>
-  <b>開けてみるまで中身がわからない</b><br><br>
-  型（Type）は面倒なルールではなく<br>
-  <span class="green-accent-text">ミスを防ぐ安全装置</span>
-</div>
-
----
-
-<!-- _class: no-header all-text-center align-center -->
-
-# 今日の Copilot 機能
-
-<br>
-
-<div class="copilot-box">
-  <b><code>#selection</code></b> — エディタで選択した範囲をCopilotに参照させる<br>
-  「この部分について教えて」がピンポイントでできる<br><br>
-  <b><code>/explain</code></b> — 選択したコードの解説を依頼するコマンド<br><br>
-  組み合わせ: <code>#selection /explain このコードの問題を教えて</code>
-</div>
-
----
-
-<!-- _class: no-header all-text-center align-center -->
-
-# ハンズオン
+# 実験① 型を壊してみる
 
 <br>
 
 <div class="experiment-box">
-  <b>Step 1（5分）：荷物管理アプリを作らせる</b><br>
-  Agent Mode で「引っ越しの荷物管理Webアプリを作って。<br>
-  段ボール箱にラベルと中身を登録して一覧表示」<br>
-  LiveServer でプレビュー<br><br>
-  <b>Step 2（5分）：意図的に型の混乱を起こす</b><br>
-  個数フィールドの足し算を文字列のまま実行<br>
-  <code>"3" + 2</code> → <code>"32"</code> になるバグを体験！<br><br>
-  <b>Step 3（7分）：<code>#selection</code> + <code>/explain</code> で原因調査</b><br>
-  バグのある行を選択 →<br>
-  <code>#selection /explain このコードの問題を教えて</code><br>
-  「ラベルが違うものを混ぜたから壊れた」ことを確認
+
+**【Copilot Chat → Agent モードで投げる】**
+
+```
+「JavaScriptで以下の2つを計算するHTMLを作って：
+1. 数字の 1 + 数字の 2
+2. 文字列の "1" + 数字の 2
+両方の結果をページに表示して。ファイル名: type-test.html」
+```
+
+手順: Live Server で開く → 結果を確認
+
+</div>
+
+---
+
+<!-- _class: no-header all-text-center align-center -->
+
+# 何が起きた？
+
+<br>
+
+<div class="observe-box">
+
+- 「1 + 2 = 3」なのに「"1" + 2 = "12"」になる
+
+- なぜ？ → <span class="red-accent-text">型が違うから足し算の意味が変わる</span>
+
+- 数値の `+` は「足し算」 / 文字列の `+` は「くっつける」
+
+</div>
+
+---
+
+<!-- _class: no-header all-text-center align-center -->
+
+# 実験② /explain で解説させる
+
+<br>
+
+<div class="experiment-box">
+
+**【JSのコード部分（数値と文字列の計算部分）を選択して】**
+
+```
+Copilot Chat で: /explain
+「この結果の違いが起きる理由を、
+ プログラム初心者にわかるように説明して」
+```
+
 </div>
 
 ---
@@ -209,10 +174,13 @@ ponpon.USA
 <br>
 
 <div class="highlight-box">
-  型が合わないと<span class="red-accent-text">意図しない動作</span>になる<br>
-  ＝ ラベルのない箱を開けたら中身が違った<br><br>
-  <b><code>#selection</code></b> でピンポイントに質問できる<br><br>
-  型は「面倒なルール」ではなく<b>「安全装置」</b>
+
+型（Type）は面倒なルールではなく、<span class="green-accent-text">ミスを防ぐ安全装置</span><br><br>
+
+**問いかけ：** 型のない世界では何が困る？<br><br>
+
+→ 銀行システムで「金額」に文字列が入ったら...
+
 </div>
 
 ---
@@ -220,89 +188,71 @@ ponpon.USA
 <!-- _class: section -->
 <!-- _paginate: false -->
 
-## Day 7：アルゴリズム — 分岐と反復
+## Day 7：アルゴリズム
 
 ---
 
 <!-- _class: no-header all-text-center align-center -->
 
-# 今日の比喩
+# 「電車の乗り換え案内」
 
 <br>
 
-# 自動販売機の裏側
+### 「もし遅延なら（if）別のルートを選ぶ」
 
-<br>
+### 「全駅に停車する（loop）」
 
-### お金を入れる → 金額を判定 → 足りなければ返却
-
-### 足りれば商品排出 → お釣り計算
+### プログラムは<span class="blue-accent-text">条件と繰り返しの組み合わせ</span>
 
 ---
 
 <!-- _class: no-header all-text-center align-center -->
 
-# プログラミング = 手順書を書くこと
-
-<br>
-
-<div class="highlight-box">
-  自販機は「手順書」通りに動いている<br><br>
-  <b>「もし〜なら」（分岐 = if）</b><br>
-  <b>「〜を繰り返す」（反復 = for/while）</b><br><br>
-  この2つがあれば<br>
-  <span class="green-accent-text">ほとんどの手順を表現できる</span>
-</div>
-
----
-
-<!-- _class: no-header all-text-center align-center -->
-
-# 今日の Copilot 機能
-
-<br>
-
-<div class="copilot-box">
-  <b><code>/fix</code></b> — バグを自動修正するスラッシュコマンド<br><br>
-  エラーが出ているコードを選択して<br>
-  <code>/fix</code> と打つだけで修正案を提示してくれる<br><br>
-  「壊れた自販機を直す」道具
-</div>
-
----
-
-<!-- _class: no-header all-text-center align-center -->
-
-# ハンズオン（事前準備あり）
-
-<br>
-
-<div class="highlight-box">
-  メンターが <b>「バグ入り自販機アプリ」</b> を用意しています<br><br>
-  バグ1: 存在しない商品（ジュース）のボタンがある<br>
-  バグ2: 投入金額が文字列のまま比較されている<br>
-  バグ3: <code>></code> であるべき箇所が <code>>=</code> になっていない
-</div>
-
----
-
-<!-- _class: no-header all-text-center align-center -->
-
-# ハンズオン
+# 実験① 朝のルーティンをコードにする
 
 <br>
 
 <div class="experiment-box">
-  <b>Step 1（3分）：バグ入り自販機を動かす</b><br>
-  LiveServer で開いて操作してみる<br>
-  「150円入れたのにコーラが買えない！」<br><br>
-  <b>Step 2（7分）：<code>/fix</code> でバグを直す</b><br>
-  バグのある行を選択 → <code>/fix</code><br>
-  存在チェック追加 → <code>>=</code> に修正 → 文字列を数値変換<br>
-  各修正を Accept → LiveServer で再確認<br><br>
-  <b>Step 3（7分）：分岐と反復を発見する</b><br>
-  修正後のコードで「if と for をすべて見つけて<br>
-  自販機の動作に例えて説明して」とCopilotに質問
+
+まず自分で「起きてから家を出るまで」を箇条書きにする（3分）
+
+<br>
+
+**【Copilot Chat → Ask モードで投げる】**
+
+```
+「以下の朝のルーティンを、if文とループを使った
+擬似コード（日本語）に翻訳して。
+"雨が降っていたら傘を持つ" の分岐も含めて。
+
+[自分の箇条書きをここに貼る]」
+```
+
+</div>
+
+---
+
+<!-- _class: no-header all-text-center align-center -->
+
+# 実験② 擬似コードを動くコードにする
+
+<br>
+
+<div class="experiment-box">
+
+**【Chat モードを Agent に切り替えて投げる】**
+
+```
+「上の擬似コードを、ブラウザで動くJavaScriptに変換して。
+条件分岐（if）とループ（for/while）を実際のJS構文で書いて。
+HTML1ファイルで完結する形で。ファイル名: routine.html」
+```
+
+<br>
+
+→ Agent モードがファイルを自動作成 → Live Server で開いて動作確認<br>
+観察: どの行が if？ どの行が loop？
+
 </div>
 
 ---
@@ -314,10 +264,12 @@ ponpon.USA
 <br>
 
 <div class="highlight-box">
-  プログラミングは <span class="green-accent-text">「手順の言語化」</span> に過ぎない<br><br>
-  <b><code>/fix</code></b> がエラーの原因を推測し、<br>
-  適切な修正を提案してくれる<br><br>
-  分岐（if）と反復（for）で<b>ほとんどの処理が表現できる</b>
+
+「プログラミングとは<span class="green-accent-text">『手順と条件』の言語化</span>に過ぎない」<br><br>
+
+**問いかけ：** 今日やったこと以外で、<br>
+ループしている日常の作業を1つ挙げるとしたら？
+
 </div>
 
 ---
@@ -325,77 +277,71 @@ ponpon.USA
 <!-- _class: section -->
 <!-- _paginate: false -->
 
-## Day 8：OOP — オブジェクト指向
+## Day 8：OOP（オブジェクト指向）
 
 ---
 
 <!-- _class: no-header all-text-center align-center -->
 
-# 今日の比喩
-
-<br>
-
-# RPGのジョブシステム
+# 「RPGの職業とキャラ」
 
 <br>
 
 ### 「戦士」という設計図（クラス）から
 
-### 「勇者アレク」「戦士タロウ」という個体を作る
+### 「Aさん」「Bさん」（インスタンス）を作る
+
+### <span class="blue-accent-text">設計図と実体は別物</span>
 
 ---
 
 <!-- _class: no-header all-text-center align-center -->
 
-# 設計図（クラス）は共通、実体は個別
-
-<br>
-
-<div class="highlight-box">
-  スライムもドラゴンも<br>
-  「攻撃する」「ダメージを受ける」という<b>共通の行動</b>を持っている<br><br>
-  でも攻撃力やHPは<b>違う</b><br><br>
-  <span class="green-accent-text">設計図（クラス）は共通、実体（インスタンス）は個別</span><br>
-  これがオブジェクト指向の核心
-</div>
-
----
-
-<!-- _class: no-header all-text-center align-center -->
-
-# 今日の Copilot 機能
-
-<br>
-
-<div class="copilot-box">
-  <b><code>#file</code> 複数指定</b><br><br>
-  <code>#file:warrior.js #file:mage.js</code><br>
-  <code>このファイル同士の関係を教えて</code><br><br>
-  複数ファイルを同時に参照させて<br>
-  <b>ファイル間の関係</b>を横断的に質問できる
-</div>
-
----
-
-<!-- _class: no-header all-text-center align-center -->
-
-# ハンズオン
+# 実験① ドラクエのモンスターをクラスで表現
 
 <br>
 
 <div class="experiment-box">
-  <b>Step 1（6分）：RPGキャラ管理を作らせる</b><br>
-  Agent Mode で「RPGキャラ管理システムを作って。<br>
-  <code>character.js</code>に基底クラス、<code>warrior.js</code>に戦士、<br>
-  <code>mage.js</code>に魔法使い、<code>battle.html</code>にバトル画面」<br><br>
-  <b>Step 2（5分）：<code>#file</code> で関係性を質問</b><br>
-  <code>#file:character.js #file:warrior.js</code><br>
-  「戦士は基底クラスの何を継承していますか？」<br>
-  <code>#file:warrior.js #file:mage.js</code><br>
-  「この2つの共通点と違いを教えて」<br><br>
-  <b>Step 3（6分）：新しい職業を追加する</b><br>
-  Agent Mode で「<code>healer.js</code> にヒーラーを追加して。<br>
-  heal メソッド付きで」→ 設計図のルールに従えば増やせる！
+
+**【Copilot Chat → Agent モードで投げる】**
+
+```
+「ドラゴンクエストのモンスターをJavaScriptのclassで表現して。
+モンスターには名前・HP・攻撃力を持たせて、
+attack() というメソッドで攻撃できるようにして。
+スライム・ドラゴン・ゴーレムの3種類を作って、
+それぞれに attack() を呼んだ結果も表示して。
+HTML1ファイルで。ファイル名: monsters.html」
+```
+
+→ Agent がファイルを作成 → Live Server で開いて動作確認
+
+観察: スライムもドラゴンも同じ `attack()` メソッドを持っている
+
+</div>
+
+---
+
+<!-- _class: no-header all-text-center align-center -->
+
+# 実験② #selection でクラスを解剖する
+
+<br>
+
+<div class="experiment-box">
+
+```
+Step 1: monsters.html をエディタで開く
+
+Step 2: 「class Monster { ... }」の部分をマウスで選択
+
+Step 3: Copilot Chat（Ask モード）で:
+「#selection これがクラス（設計図）です。
+ このクラスから作られた slime や dragon が
+ インスタンス（実体）です。
+ 設計図と実体の違いを料理に例えて説明して」
+```
+
 </div>
 
 ---
@@ -407,10 +353,12 @@ ponpon.USA
 <br>
 
 <div class="highlight-box">
-  <b>クラス（設計図）</b>と<b>インスタンス（実体）</b>の関係<br><br>
-  継承により共通の機能が<span class="green-accent-text">自動的に引き継がれる</span><br><br>
-  <b><code>#file</code> の複数指定</b>で<br>
-  ファイル間の関係を横断的に質問できる
+
+クラス（設計図）= レシピ / インスタンス（実体）= 実際に作った料理<br><br>
+
+**問いかけ：** クラスとインスタンスを<br>
+料理以外で例えるとしたら？
+
 </div>
 
 ---
@@ -418,89 +366,91 @@ ponpon.USA
 <!-- _class: section -->
 <!-- _paginate: false -->
 
-## Day 9：テスト — 品質保証
+## Day 9：テスト
 
 ---
 
 <!-- _class: no-header all-text-center align-center -->
 
-# 今日の比喩
+# 「料理の毒見」
 
 <br>
 
-# 料理の味見（毒見）
+### 客に出す前に必ずスプーンで一口味見する
 
-<br>
-
-### どんなに腕の良いシェフでも
-
-### **味見なしで料理を出すことはない**
+### テストコードは<span class="red-accent-text">「自動毒見ロボット」</span>
 
 ---
 
 <!-- _class: no-header all-text-center align-center -->
 
-# テストコード = 自動味見マシン
-
-<br>
-
-<div class="highlight-box">
-  客に出す前に、必ずスプーンで一口味見する<br><br>
-  テストコードとは<b>「自動味見マシン」</b>のこと<br><br>
-  一度設定すれば<br>
-  <span class="green-accent-text">何度でも同じ基準で味見してくれる</span>
-</div>
-
----
-
-<!-- _class: no-header all-text-center align-center -->
-
-# 今日の Copilot 機能
-
-<br>
-
-<div class="copilot-box">
-  <b>Vision入力</b> — チャットに画像を添付して質問できる<br><br>
-  スクリーンショット、UI、エラー画面など<br>
-  <b>「この画面のバグを見つけて」</b> ができる<br><br>
-  ドラッグ&ドロップ or クリップアイコンで添付
-</div>
-
----
-
-<!-- _class: no-header all-text-center align-center -->
-
-# ハンズオン（事前準備あり）
-
-<br>
-
-<div class="highlight-box">
-  メンターが <b>「バグ入り計算機アプリ」</b> を用意しています<br><br>
-  意図的なバグ: 割り算で小数点以下が切り捨てられる<br>
-  例: <code>10 ÷ 3 = 3</code>（正しくは <code>3.333...</code>）
-</div>
-
----
-
-<!-- _class: no-header all-text-center align-center -->
-
-# ハンズオン
+# 実験① バグのある電卓を作る
 
 <br>
 
 <div class="experiment-box">
-  <b>Step 1（4分）：バグを見つける</b><br>
-  計算機をブラウザで操作し、バグを発見<br>
-  「10 ÷ 3 = 3」→ おかしい！<br>
-  バグが映った画面のスクリーンショットを撮る<br><br>
-  <b>Step 2（6分）：Vision入力でバグを報告</b><br>
-  スクショを Copilot Chat にドラッグ&ドロップ<br>
-  「この計算結果がおかしい。原因を特定して修正案を教えて」<br>
-  Copilot が画像を解析する様子を観察<br><br>
-  <b>Step 3（7分）：テストコードを書かせる</b><br>
-  「割り算のテストコードを書いて。<br>
-  正常系・小数点・ゼロ除算をカバーして」<br>
-  テスト実行 → バグが自動検出されることを確認
+
+**【Copilot Chat → Agent モードで投げる】**
+
+```
+「JavaScriptで電卓を作って。ただし、
+わざと以下のバグを仕込んで：
+・5 + 3 を計算すると正しく 8 が返る
+・10 ÷ 2 を計算すると間違えて 6 が返る
+・それ以外は正常に動く
+バグがあることは見た目ではわからない状態にして。
+HTML1ファイルで。ファイル名: buggy-calc.html」
+```
+
+<br>
+
+観察: 普通に使っても気づかない → でも確実にバグがある
+
+</div>
+
+---
+
+<!-- _class: no-header all-text-center align-center -->
+
+# 実験② /tests でバグを自動発見する
+
+<br>
+
+<div class="experiment-box">
+
+```
+Step 1: 生成されたJSの計算ロジック部分（calculate 関数など）を選択
+
+Step 2: Copilot Chat（Ask モード）で /tests を実行:
+/tests
+
+Step 3: テスト生成後、Agent モードに切り替えて続けて投げる:
+「ブラウザで動くassert形式に変えて。
+ 期待値と実際の値を比較して、
+ NG は赤・OK は緑でページに表示して。
+ ファイル名: buggy-calc-test.html」
+
+→ Agent モードがファイルを自動生成する
+
+Step 4: Live Server で開く → 10÷2 の行が赤くなることを確認
+```
+
+</div>
+
+---
+
+<!-- _class: no-header all-text-center align-center -->
+
+# 自動で見つかった
+
+<br>
+
+<div class="observe-box">
+
+- バグを「探した」のではなく「自動的に見つかった」
+
+- これが「テストコード = <span class="green-accent-text">自動毒見ロボット</span>」の意味
+
 </div>
 
 ---
@@ -512,10 +462,14 @@ ponpon.USA
 <br>
 
 <div class="highlight-box">
-  <b>Vision入力</b>でスクショからバグを特定できる<br><br>
-  テストコードは<span class="green-accent-text">「一度書けば何度でも確認してくれる」</span><br>
-  安心装置<br><br>
-  テストコード ＝ <b>安心料</b>
+
+**「テストコードが世界から消えたら何が困る？」**<br><br>
+
+→ バグが本番まで気づかれない<br>
+→ リリースのたびに人間が全部確認する必要がある<br><br>
+
+テストコードは<span class="green-accent-text">「安心料」</span>
+
 </div>
 
 ---
@@ -523,104 +477,68 @@ ponpon.USA
 <!-- _class: section -->
 <!-- _paginate: false -->
 
-## Day 10：まとめ — 身近なプログラム
+## Day 10：まとめ
 
 ---
 
 <!-- _class: no-header all-text-center align-center -->
 
-# 今日の比喩
+# 「自動販売機の裏側」
 
 <br>
 
-# コンビニレジの裏側
+### お金を入れる → ランプ点灯 → ボタン押下 → 排出 → お釣り
 
-<br>
-
-### 毎日使うレジに Week 2 の全概念が詰まっている
+### これも<span class="blue-accent-text">変数・if・ループ</span>でできている
 
 ---
 
 <!-- _class: no-header all-text-center align-center -->
 
-# コンビニレジ = プログラムの概念の集合体
-
-<br>
-
-<div class="highlight-box">
-  <b>変数</b> — 商品名・価格・合計金額<br><br>
-  <b>分岐（if）</b> — 年齢確認（酒・タバコ）<br><br>
-  <b>反復（for）</b> — バーコードスキャンの繰り返し<br><br>
-  <b>クラス</b> — 商品カテゴリ（食品・飲料・日用品）<br><br>
-  <b>テスト</b> — レシート確認（合計が合っているか）
-</div>
-
----
-
-<!-- _class: no-header all-text-center align-center -->
-
-# 今日の Copilot 機能
-
-<br>
-
-<div class="copilot-box">
-  <b>Week 2 の全機能を組み合わせて使う</b><br><br>
-  <code>#selection</code>、<code>/explain</code>、<code>/fix</code>、<code>#file</code>、Vision入力<br><br>
-  状況に応じて<span class="green-accent-text">使い分ける</span>実践
-</div>
-
----
-
-<!-- _class: no-header all-text-center align-center -->
-
-# ハンズオン
+# 実験 自販機をプログラムで設計する
 
 <br>
 
 <div class="experiment-box">
-  <b>Step 1（3分）：コンビニレジの仕様を設計する</b><br>
-  Ask Mode で「コンビニレジの処理フローを設計して。<br>
-  バーコードスキャン・年齢確認・合計計算・お釣り・レシート」<br><br>
-  <b>Step 2（8分）：Agent Mode で実装させる</b><br>
-  「設計に基づいてレジシミュレーターを作って。<br>
-  商品クラス・レジクラス・年齢確認の分岐・<br>
-  スキャンのループを含めて。HTML/CSS/JSで完結」<br>
-  Week 2 の概念が全部登場することを確認<br><br>
-  <b>Step 3（6分）：バグ修正とテスト追加</b><br>
-  「消費税計算が抜けている」等を <code>/fix</code> で修正<br>
-  「合計金額計算のテストを書いて」で自動テスト追加
+
+**【Copilot Chat → Ask モードで投げる】**
+
+```
+「自動販売機の動作を、以下の用語を使って説明して：
+・変数（お金の合計、選ばれた商品、在庫数）
+・if文（お金が足りるか、在庫があるか）
+・ループ（複数の商品ボタンを確認する処理）
+プログラムを書かず、日本語の説明だけで。」
+
+→ 続けて:
+「この説明を、小学生にわかるように言い直して」
+```
+
 </div>
 
 ---
 
 <!-- _class: no-header all-text-center align-center -->
-
-# 現実世界がプログラムに見え始める
-
-<br>
-
-<div class="highlight-box">
-  コンビニレジ、自販機、電車の改札、エレベーター...<br><br>
-  どれも <span class="green-accent-text">変数・分岐・反復・クラス</span> で動いている<br><br>
-  Week 2 で学んだ「整理整頓のルール」は<br>
-  <b>すべての機械の中にある</b>
-</div>
-
----
-
-<!-- _class: no-header all-text-center align-center table-center table-font-large -->
 
 # Week 2 Key Takeaways
 
 <br>
 
-| 比喩 | IT概念 | Copilot機能 |
-|---|---|---|
-| ラベル付き収納BOX | 変数と型 | `#selection` + `/explain` |
-| 自動販売機の裏側 | アルゴリズム | `/fix` |
-| RPGのジョブシステム | OOP | `#file` 複数指定 |
-| 料理の味見 | テスト | Vision入力 |
-| コンビニレジ | 全概念統合 | 全機能組み合わせ |
+### 1. **変数と型 = ラベル付き収納BOX**
+
+型はミスを防ぐ安全装置
+
+### 2. **アルゴリズム = 条件（if）と繰り返し（loop）の組み合わせ**
+
+手順と条件を言語化するだけ
+
+### 3. **クラスとインスタンス = レシピと実際の料理**
+
+設計図と実体は別物
+
+### 4. **テスト = 自動毒見ロボット**
+
+バグを自動発見する仕組み
 
 ---
 
@@ -636,9 +554,7 @@ ponpon.USA
 
 <br>
 
-### `@workspace`、`#codebase`、`/tests`、Agent Mode応用
-
-### インフラ系の武器を手に入れます
+### クラウド・Docker・ログ・APIの世界へ
 
 ---
 
